@@ -12,11 +12,12 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
-    name = models.CharField(max_length=180)
-    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(blank=True)
     price_cents = models.PositiveIntegerField()
     currency = models.CharField(max_length=3, default="USD")
+    image_url = models.URLField(blank=True, null=True, max_length=500)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
