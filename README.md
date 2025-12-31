@@ -96,7 +96,7 @@ python manage.py createsuperuser
 
 ### Optional: seed test catalog
 ```bash
-python manage.py seed_platzi --limit 200
+python manage.py seed_platzi
 ```
 
 ---
