@@ -21,13 +21,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from catalog.views import CategoryViewSet, ProductViewSet
-from cart.views import CartViewSet
 from orders.views import OrderViewSet
 
 router = DefaultRouter()
 router.register(r"categories", CategoryViewSet, basename="category")
 router.register(r"products", ProductViewSet, basename="product")
-router.register(r"cart", CartViewSet, basename="cart")
 router.register(r"orders", OrderViewSet, basename="order")
 
 urlpatterns = [
@@ -36,8 +34,10 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 
+    path("api/account/", include("accounts.urls")),
     path("api/auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/", include("cart.urls")),
 
     path("api/", include(router.urls)),
 ]
